@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aula 30: Contando o Que Outros Disseram – Discurso Indireto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET E BASE --- */
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px 15px;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        /* --- TIPOGRAFIA --- */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            line-height: 1.3;
+        }
+        
+        h2, h3, h4 { color: #2c3e50; margin-top: 25px; }
+        h3 { color: #34495e; font-size: 1.25rem; border-left: 4px solid #3498db; padding-left: 10px; }
+        h4 { color: #c0392b; font-size: 1.1rem; margin-bottom: 10px; }
+        
+        p, li { font-size: 1rem; margin-bottom: 10px; }
+        
+        .emoji-large { font-size: 1.5rem; }
+        .emoji-small { font-size: 1.2rem; }
+
+        /* --- DESTAQUES E CAIXAS --- */
+        .theme-intro, .nota-gramatical, .nota-dica, .secao-exercicios, .extra-task {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 5px solid transparent;
+        }
+
+        .theme-intro { background-color: #eaf2f8; border-left-color: #3498db; }
+        .nota-gramatical { background-color: #ecf0f1; border-left-color: #f39c12; }
+        .nota-dica { background-color: #e8f6f3; border-left-color: #16a085; }
+        .extra-task { background-color: #f5eef8; border-left-color: #9b59b6; }
+        .secao-exercicios { background-color: #fff8e1; border-left-color: #f39c12; }
+
+        .example-word { color: #2980b9; font-weight: 700; }
+        
+        /* --- ESTILOS DE IPA E PRONÚNCIA --- */
+        code, .ipa-symbol {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+        
+        .character-portuguese-phonetics {
+            display: block;
+            color: #27ae60;
+            font-style: italic;
+            font-size: 0.85em;
+            margin-top: 2px;
+        }
+
+        /* --- BOTÃO DE NAVEGAÇÃO --- */
+        .nav-btn {
+            display: block;
+            width: 100%;
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin: 10px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-btn:hover { background-color: #2c3e50; }
+
+        /* --- TABELAS OTIMIZADAS PARA MOBILE --- */
+        .table-responsive-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 100%; 
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .details-cell {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .details-translation {
+            display: block;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #ddd;
+            color: #444;
+            font-weight: 500;
+        }
+
+        /* --- BOTÃO DE ÁUDIO GERAL --- */
+        .audio-btn-inline {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            vertical-align: middle;
+            margin-left: 5px;
+            padding: 0 5px;
+        }
+        
+        /* --- VOCABULÁRIO: GRID DE CARDS (Mobile First) --- */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 600px) {
+            .vocab-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .vocab-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+        
+        .vocab-item:active { transform: scale(0.98); background-color: #fdfdfd; }
+
+        .vocab-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .vocab-en {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .vocab-ipa {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: #e67e22;
+        }
+
+        .vocab-pt {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .audio-btn-round {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-left: 10px;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        .audio-btn-round:active { background-color: #2980b9; }
+
+        /* --- GABARITO E EXERCÍCIOS --- */
+        .fill-in-blank {
+            display: inline-block;
+            min-width: 60px;
+            border-bottom: 2px solid #3498db;
+            text-align: center;
+            color: #3498db;
+            font-weight: bold;
+            padding: 0 5px;
+        }
+
+        details.gabarito {
+            margin-top: 20px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        details.gabarito summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: #2c3e50;
+            padding: 10px;
+            list-style: none;
+        }
+        
+        details.gabarito summary::after { content: " 👇"; }
+        details.gabarito[open] summary::after { content: " 👆"; }
+
+        .gabarito-content {
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            color: #555;
+        }
+
+        .quiz-options {
+            list-style-type: lower-alpha;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Botão Navegação Topo -->
+        <button class="nav-btn" onclick="alert('Voltar ao Menu Principal')">⬅ Voltar ao Menu</button>
+
+        <h1>Aula 30: Contando o Que Outros Disseram – Discurso Indireto (Reported Speech) <span class="emoji-large">🗣️💬</span><br><span style="font-size: 0.8em; font-weight: normal;">(Reporting What Others Said – Reported Speech)</span></h1>
+
+        <div class="theme-intro">
+            <p>Bem-vindo(a) à Aula 30! <span class="emoji-small">✨</span></p>
+            <p>Nesta aula, vamos aprender a relatar o que outras pessoas disseram, usando o <strong>Discurso Indireto (Reported Speech ou Indirect Speech)</strong>. Isso é muito útil para contar histórias e transmitir informações. Nosso tema será <strong>Relatando conversas do trabalho, o que alguém disse em uma ligação, ou em situações de compras</strong>. Prepare-se para se tornar um ótimo contador de histórias! <span class="emoji-small">🛍️📞💼</span></p>
+        </div>
+
+        <h2>30. Relatando Conversas: Discurso Indireto</h2>
+
+        <section id="reported-speech-intro">
+            <h3>30.1 O Que é Discurso Indireto? <span class="emoji-small">🗣️➡️💬</span></h3>
+            <p>O <strong>Discurso Indireto (Reported Speech)</strong> é usado quando queremos contar a alguém o que outra pessoa disse, sem usar as palavras exatas dela.</p>
+            <ul>
+                <li><strong>Discurso Direto:</strong> She said, "I <span class="example-word">am</span> busy." (Ela disse: "Eu estou ocupada.")</li>
+                <li><strong>Discurso Indireto:</strong> She said (that) she <span class="example-word">was</span> busy. (Ela disse que estava ocupada.)</li>
+            </ul>
+            <p>Ao transformar o discurso, geralmente mudamos pronomes, tempos verbais (<em>backshift</em>), e expressões de tempo/lugar. Os verbos de relato mais comuns são "say" e "tell" (Lembre-se: <strong>say something</strong> vs. <strong>tell someone something</strong>).</p>
+        </section>
+
+        <section id="backshift-and-changes">
+            <h3>30.2 Mudanças Essenciais no Discurso Indireto <span class="emoji-small">🔄</span></h3>
+            <p>Quando o verbo de relato (ex: said, told) está no passado, o tempo verbal da frase original geralmente "dá um passo para trás" no tempo (<em>backshift</em>). Pronomes e expressões de tempo também se ajustam.</p>
+            <div class="nota-dica">
+                <h4>Principais Mudanças (Backshift):</h4>
+                <ul>
+                    <li><strong>Simple Present → Simple Past</strong> ("I work" → he worked)</li>
+                    <li><strong>Present Continuous → Past Continuous</strong> ("I am working" → he was working)</li>
+                    <li><strong>Simple Past / Present Perfect → Past Perfect</strong> ("I worked" / "I have worked" → he had worked)</li>
+                    <li><strong>will → would</strong> ("I will work" → he would work)</li>
+                    <li><strong>can → could</strong> ("I can work" → he could work)</li>
+                    <li><strong>today → that day</strong>; <strong>tomorrow → the next day</strong>; <strong>yesterday → the day before</strong></li>
+                    <li><strong>here → there</strong>; <strong>this → that</strong></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="reporting-practice">
+            <h3>30.3 Prática: Relatando Conversas do Dia a Dia</h3>
+            <p>Aqui estão 30 exemplos práticos seguindo a sequência exata do arquivo original.</p>
+            
+            <div class="table-responsive-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 45%;">Discurso Direto / Indireto</th>
+                            <th>Detalhes (IPA / Tradução)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 1 -->
+                        <tr>
+                            <td>"I need a new phone."<br>→ He said he <span class="example-word">needed</span> a new phone. <button class="audio-btn-inline" onclick="playAudio('He said he needed a new phone.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː sed hiː ˈniːdɪd.../</span><br><span class="character-portuguese-phonetics">(ríi séd ríi níi-dêd...)</span><span class="details-translation">Ele disse que precisava de um celular novo.</span></td>
+                        </tr>
+                        <!-- 2 -->
+                        <tr>
+                            <td>"She works in the marketing department."<br>→ He told me she <span class="example-word">worked</span> in the marketing department. <button class="audio-btn-inline" onclick="playAudio('He told me she worked in the marketing department.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː toʊld miː ʃiː wɜːrkt.../</span><br><span class="character-portuguese-phonetics">(ríi tôuld míi xíi uãrkt...)</span><span class="details-translation">Ele me disse que ela trabalhava no departamento de marketing.</span></td>
+                        </tr>
+                        <!-- 3 -->
+                        <tr>
+                            <td>"We want to buy these items."<br>→ They said they <span class="example-word">wanted</span> to buy <span class="example-word">those</span> items. <button class="audio-btn-inline" onclick="playAudio('They said they wanted to buy those items.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðeɪ sed ðeɪ ˈwɑːntɪd.../</span><br><span class="character-portuguese-phonetics">(dhêi séd dhêi uón-têd...)</span><span class="details-translation">Eles disseram que queriam comprar aqueles itens.</span></td>
+                        </tr>
+                        <!-- 4 -->
+                        <tr>
+                            <td>"I don't understand the instructions."<br>→ She said she <span class="example-word">didn't understand</span> the instructions. <button class="audio-btn-inline" onclick="playAudio('She said she didn\'t understand the instructions.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː sed ʃiː ˈdɪdnt ˌʌndərˈstænd.../</span><br><span class="character-portuguese-phonetics">(xíi séd xíi dê-dãnt ân-dãr-sténd...)</span><span class="details-translation">Ela disse que não entendia as instruções.</span></td>
+                        </tr>
+                        <!-- 5 -->
+                        <tr>
+                            <td>"The supermarket closes at 10 PM."<br>→ He mentioned that the supermarket <span class="example-word">closed</span> at 10 PM. <button class="audio-btn-inline" onclick="playAudio('He mentioned that the supermarket closed at 10 PM.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː ˈmenʃənd ðæt ðə ˈsuːpərmɑːrkɪt kloʊzd.../</span><br><span class="character-portuguese-phonetics">(ríi mén-xãnd dhét dhã súu-pãr-már-kêt clôuzd...)</span><span class="details-translation">Ele mencionou que o supermercado fechava às 22h.</span></td>
+                        </tr>
+                        <!-- 6 -->
+                        <tr>
+                            <td>"I am waiting for a call from my boss."<br>→ She said she <span class="example-word">was waiting</span> for a call from her boss. <button class="audio-btn-inline" onclick="playAudio('She said she was waiting for a call from her boss.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː sed ʃiː wəz ˈweɪtɪŋ.../</span><br><span class="character-portuguese-phonetics">(xíi séd xíi uãz uêi-tin...)</span><span class="details-translation">Ela disse que estava esperando uma ligação do chefe dela.</span></td>
+                        </tr>
+                        <!-- 7 -->
+                        <tr>
+                            <td>"They are planning the next project meeting."<br>→ He explained they <span class="example-word">were planning</span> the next project meeting. <button class="audio-btn-inline" onclick="playAudio('He explained they were planning the next project meeting.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː ɪkˈspleɪnd ðeɪ wər ˈplænɪŋ.../</span><br><span class="character-portuguese-phonetics">(ríi ek-splêind dhêi uãr plé-nin...)</span><span class="details-translation">Ele explicou que eles estavam planejando a próxima reunião do projeto.</span></td>
+                        </tr>
+                        <!-- 8 -->
+                        <tr>
+                            <td>"We're looking for the electronics section."<br>→ They told me they <span class="example-word">were looking</span> for the electronics section. <button class="audio-btn-inline" onclick="playAudio('They told me they were looking for the electronics section.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðeɪ toʊld miː ðeɪ wər ˈlʊkɪŋ.../</span><br><span class="character-portuguese-phonetics">(dhêi tôuld míi dhêi uãr lú-kin...)</span><span class="details-translation">Eles me disseram que estavam procurando a seção de eletrônicos.</span></td>
+                        </tr>
+                        <!-- 9 -->
+                        <tr>
+                            <td>"I bought this shirt yesterday."<br>→ He said he <span class="example-word">had bought</span> that shirt <span class="example-word">the day before</span>. <button class="audio-btn-inline" onclick="playAudio('He said he had bought that shirt the day before.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː sed hiː hæd bɔːt.../</span><br><span class="character-portuguese-phonetics">(ríi séd ríi réd bót...)</span><span class="details-translation">Ele disse que tinha comprado aquela camisa no dia anterior.</span></td>
+                        </tr>
+                        <!-- 10 -->
+                        <tr>
+                            <td>"We didn't receive the package."<br>→ They said they <span class="example-word">hadn't received</span> the package. <button class="audio-btn-inline" onclick="playAudio('They said they hadn\'t received the package.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðeɪ sed ðeɪ ˈhædnt rɪˈsiːvd.../</span><br><span class="character-portuguese-phonetics">(dhêi séd dhêi ré-dãnt rĩ-síivd...)</span><span class="details-translation">Eles disseram que não tinham recebido o pacote.</span></td>
+                        </tr>
+                        <!-- 11 -->
+                        <tr>
+                            <td>"I have already finished my tasks."<br>→ She told her boss she <span class="example-word">had already finished</span> her tasks. <button class="audio-btn-inline" onclick="playAudio('She told her boss she had already finished her tasks.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː toʊld hɜːr bɔːs ʃiː hæd ɔːlˈredi ˈfɪnɪʃt.../</span><br><span class="character-portuguese-phonetics">(xíi tôuld rãr bós xíi réd ól-ré-di fê-nêsht...)</span><span class="details-translation">Ela disse ao chefe dela que já tinha terminado suas tarefas.</span></td>
+                        </tr>
+                        <!-- 12 -->
+                        <tr>
+                            <td>"He has never been to this store before."<br>→ She said he <span class="example-word">had never been</span> to that store before. <button class="audio-btn-inline" onclick="playAudio('She said he had never been to that store before.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː sed hiː hæd ˈnevər bɪn.../</span><br><span class="character-portuguese-phonetics">(xíi séd ríi réd né-võr bên...)</span><span class="details-translation">Ela disse que ele nunca tinha estado naquela loja antes.</span></td>
+                        </tr>
+                        <!-- 13 -->
+                        <tr>
+                            <td>"I will call you back tomorrow."<br>→ He said he <span class="example-word">would call</span> me back <span class="example-word">the next day</span>. <button class="audio-btn-inline" onclick="playAudio('He said he would call me back the next day.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː sed hiː wəd kɔːl miː bæk.../</span><br><span class="character-portuguese-phonetics">(ríi séd ríi uãd cól míi bék...)</span><span class="details-translation">Ele disse que me ligaria de volta no dia seguinte.</span></td>
+                        </tr>
+                        <!-- 14 -->
+                        <tr>
+                            <td>"The meeting will start in five minutes."<br>→ She announced the meeting <span class="example-word">would start</span> in five minutes. <button class="audio-btn-inline" onclick="playAudio('She announced the meeting would start in five minutes.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː əˈnaʊnst ðə ˈmiːtɪŋ wəd stɑːrt.../</span><br><span class="character-portuguese-phonetics">(xíi ã-náunst dhã míi-rin uãd stárt...)</span><span class="details-translation">Ela anunciou que a reunião começaria em cinco minutos.</span></td>
+                        </tr>
+                        <!-- 15 -->
+                        <tr>
+                            <td>"We won't be available this afternoon."<br>→ They said they <span class="example-word">wouldn't be</span> available <span class="example-word">that</span> afternoon. <button class="audio-btn-inline" onclick="playAudio('They said they wouldn\'t be available that afternoon.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðeɪ sed ðeɪ ˈwʊdnt biː əˈveɪləbl.../</span><br><span class="character-portuguese-phonetics">(dhêi séd dhêi uú-dãnt bíi ã-vêi-lã-bõl...)</span><span class="details-translation">Eles disseram que não estariam disponíveis naquela tarde.</span></td>
+                        </tr>
+                        <!-- 16 -->
+                        <tr>
+                            <td>"I can help you with that."<br>→ He said he <span class="example-word">could help</span> me with that. <button class="audio-btn-inline" onclick="playAudio('He said he could help me with that.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː sed hiː kəd help miː.../</span><br><span class="character-portuguese-phonetics">(ríi séd ríi cãd rélp míi...)</span><span class="details-translation">Ele disse que podia me ajudar com aquilo.</span></td>
+                        </tr>
+                        <!-- 17 -->
+                        <tr>
+                            <td>"You can pay at the cashier over there."<br>→ The employee told me I <span class="example-word">could pay</span> at the cashier over <span class="example-word">there</span>. <button class="audio-btn-inline" onclick="playAudio('The employee told me I could pay at the cashier over there.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ði ˌemplɔɪˈiː toʊld miː aɪ kəd peɪ.../</span><br><span class="character-portuguese-phonetics">(dhí em-plói-íi tôuld míi ái cãd pêi...)</span><span class="details-translation">O funcionário me disse que eu podia pagar no caixa ali.</span></td>
+                        </tr>
+                        <!-- 18 -->
+                        <tr>
+                            <td>"I must finish this report today."<br>→ She said she <span class="example-word">had to finish</span> that report <span class="example-word">that day</span>. <button class="audio-btn-inline" onclick="playAudio('She said she had to finish that report that day.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː sed ʃiː hæd tə ˈfɪnɪʃ.../</span><br><span class="character-portuguese-phonetics">(xíi séd xíi réd tã fê-nêsh...)</span><span class="details-translation">Ela disse que tinha que terminar aquele relatório naquele dia.</span></td>
+                        </tr>
+                        <!-- 19 -->
+                        <tr>
+                            <td>"You must be on time for the meeting."<br>→ The manager told us we <span class="example-word">had to be</span> on time for the meeting. <button class="audio-btn-inline" onclick="playAudio('The manager told us we had to be on time for the meeting.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðə ˈmænɪdʒər toʊld ʌs wiː hæd tə biː.../</span><br><span class="character-portuguese-phonetics">(dhã mé-nĩ-djãr tôuld âs uíi réd tã bíi...)</span><span class="details-translation">O gerente nos disse que tínhamos que ser pontuais para a reunião.</span></td>
+                        </tr>
+                        <!-- 20 -->
+                        <tr>
+                            <td>"The milk is in aisle three."<br>→ The store clerk said the milk <span class="example-word">was</span> in aisle three. <button class="audio-btn-inline" onclick="playAudio('The store clerk said the milk was in aisle three.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðə stɔːr klɜːrk sed ðə mɪlk wəz.../</span><br><span class="character-portuguese-phonetics">(dhã stór clãrk séd dhã mêlk uãz...)</span><span class="details-translation">O balconista disse que o leite estava no corredor três.</span></td>
+                        </tr>
+                        <!-- 21 -->
+                        <tr>
+                            <td>"I was looking for a new job."<br>→ He mentioned that he <span class="example-word">had been looking</span> for a new job. <button class="audio-btn-inline" onclick="playAudio('He mentioned that he had been looking for a new job.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː ˈmenʃənd ðæt hiː hæd bɪn ˈlʊkɪŋ.../</span><br><span class="character-portuguese-phonetics">(ríi mén-xãnd dhét ríi réd bên lú-kin...)</span><span class="details-translation">Ele mencionou que estava procurando um novo emprego.</span></td>
+                        </tr>
+                        <!-- 22 -->
+                        <tr>
+                            <td>"I have been working here for five years."<br>→ She told me she <span class="example-word">had been working</span> there for five years. <button class="audio-btn-inline" onclick="playAudio('She told me she had been working there for five years.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː toʊld miː ʃiː hæd bɪn ˈwɜːrkɪŋ.../</span><br><span class="character-portuguese-phonetics">(xíi tôuld míi xíi réd bên uãr-kin...)</span><span class="details-translation">Ela me disse que trabalhava lá há cinco anos.</span></td>
+                        </tr>
+                        <!-- 23 -->
+                        <tr>
+                            <td>"I may go to the party."<br>→ He said he <span class="example-word">might go</span> to the party. <button class="audio-btn-inline" onclick="playAudio('He said he might go to the party.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː sed hiː maɪt ɡoʊ.../</span><br><span class="character-portuguese-phonetics">(ríi séd ríi máit gôu...)</span><span class="details-translation">Ele disse que talvez fosse à festa.</span></td>
+                        </tr>
+                        <!-- 24 -->
+                        <tr>
+                            <td>"This is the best product we have."<br>→ The seller claimed that <span class="example-word">that was</span> the best product they <span class="example-word">had</span>. <button class="audio-btn-inline" onclick="playAudio('The seller claimed that that was the best product they had.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðə ˈselər kleɪmd ðæt ðæt wəz.../</span><br><span class="character-portuguese-phonetics">(dhã sé-lãr clêimd dhét dhét uãz...)</span><span class="details-translation">O vendedor alegou que aquele era o melhor produto que eles tinham.</span></td>
+                        </tr>
+                        <!-- 25 -->
+                        <tr>
+                            <td>"I don't like this brand."<br>→ The customer stated she <span class="example-word">didn't like</span> that brand. <button class="audio-btn-inline" onclick="playAudio('The customer stated she didn\'t like that brand.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðə ˈkʌstəmər ˈsteɪtɪd ʃiː ˈdɪdnt laɪk.../</span><br><span class="character-portuguese-phonetics">(dhã câs-tõ-mãr stêi-têd xíi dê-dãnt láik...)</span><span class="details-translation">A cliente afirmou que não gostava daquela marca.</span></td>
+                        </tr>
+                        <!-- 26 -->
+                        <tr>
+                            <td>"We are out of stock."<br>→ They informed us they <span class="example-word">were</span> out of stock. <button class="audio-btn-inline" onclick="playAudio('They informed us they were out of stock.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ðeɪ ɪnˈfɔːrmd ʌs ðeɪ wər aʊt əv stɑːk/</span><br><span class="character-portuguese-phonetics">(dhêi în-fórmd âs dhêi uãr áut óv stók)</span><span class="details-translation">Eles nos informaram que estavam sem estoque.</span></td>
+                        </tr>
+                        <!-- 27 -->
+                        <tr>
+                            <td>"The meeting was cancelled."<br>→ My colleague said the meeting <span class="example-word">had been</span> cancelled. <button class="audio-btn-inline" onclick="playAudio('My colleague said the meeting had been cancelled.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/maɪ ˈkɑːliːɡ sed ðə ˈmiːtɪŋ hæd bɪn ˈkænsld/</span><br><span class="character-portuguese-phonetics">(mái có-líig séd dhã míi-rin réd bên kén-sõld)</span><span class="details-translation">Meu colega disse que a reunião tinha sido cancelada.</span></td>
+                        </tr>
+                        <!-- 28 -->
+                        <tr>
+                            <td>"I'm not feeling well today."<br>→ She explained she <span class="example-word">wasn't feeling</span> well <span class="example-word">that day</span>. <button class="audio-btn-inline" onclick="playAudio('She explained she wasn\'t feeling well that day.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/ʃiː ɪkˈspleɪnd ʃiː ˈwɑːznt ˈfiːlɪŋ wel.../</span><br><span class="character-portuguese-phonetics">(xíi ek-splêind xíi uó-zãnt fíi-lin uél...)</span><span class="details-translation">Ela explicou que não estava se sentindo bem naquele dia.</span></td>
+                        </tr>
+                        <!-- 29 -->
+                        <tr>
+                            <td>"You must submit the form by Friday."<br>→ He insisted that we <span class="example-word">had to submit</span> the form by Friday. <button class="audio-btn-inline" onclick="playAudio('He insisted that we had to submit the form by Friday.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː ɪnˈsɪstɪd ðæt wiː hæd tə səbˈmɪt.../</span><br><span class="character-portuguese-phonetics">(ríi în-sês-têd dhét uíi réd tã sãb-mêt...)</span><span class="details-translation">Ele insistiu que tínhamos que submeter o formulário até sexta-feira.</span></td>
+                        </tr>
+                        <!-- 30 -->
+                        <tr>
+                            <td>"I'll be there in ten minutes."<br>→ He promised he <span class="example-word">would be</span> there in ten minutes. <button class="audio-btn-inline" onclick="playAudio('He promised he would be there in ten minutes.')">🔊</button></td>
+                            <td class="details-cell"><span class="ipa-symbol">/hiː ˈprɑːmɪst hiː wəd biː ðer.../</span><br><span class="character-portuguese-phonetics">(ríi pró-mêst ríi uãd bíi dhér...)</span><span class="details-translation">Ele prometeu que estaria lá em dez minutos.</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="vocabulario">
+            <h3>Vocabulário da Aula: Relatando Conversas 📚</h3>
+            <p>Verbos de relato essenciais em formato de cards.</p>
+            <div class="vocab-grid">
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">State</span><span class="vocab-ipa">/steɪt/</span><span class="vocab-pt">AFIRMAR / DECLARAR</span></div><button class="audio-btn-round" onclick="playAudio('State')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Explain</span><span class="vocab-ipa">/ɪkˈspleɪn/</span><span class="vocab-pt">EXPLICAR</span></div><button class="audio-btn-round" onclick="playAudio('Explain')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Mention</span><span class="vocab-ipa">/ˈmenʃn/</span><span class="vocab-pt">MENCIONAR</span></div><button class="audio-btn-round" onclick="playAudio('Mention')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Add</span><span class="vocab-ipa">/æd/</span><span class="vocab-pt">ACRESCENTAR</span></div><button class="audio-btn-round" onclick="playAudio('Add')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Insist</span><span class="vocab-ipa">/ɪnˈsɪst/</span><span class="vocab-pt">INSISTIR</span></div><button class="audio-btn-round" onclick="playAudio('Insist')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Complain</span><span class="vocab-ipa">/kəmˈpleɪn/</span><span class="vocab-pt">RECLAMAR</span></div><button class="audio-btn-round" onclick="playAudio('Complain')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Promise</span><span class="vocab-ipa">/ˈprɑːmɪs/</span><span class="vocab-pt">PROMETER</span></div><button class="audio-btn-round" onclick="playAudio('Promise')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Suggest</span><span class="vocab-ipa">/səɡˈdʒest/</span><span class="vocab-pt">SUGERIR</span></div><button class="audio-btn-round" onclick="playAudio('Suggest')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Confirm</span><span class="vocab-ipa">/kənˈfɜːrm/</span><span class="vocab-pt">CONFIRMAR</span></div><button class="audio-btn-round" onclick="playAudio('Confirm')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Deny</span><span class="vocab-ipa">/dɪˈnaɪ/</span><span class="vocab-pt">NEGAR</span></div><button class="audio-btn-round" onclick="playAudio('Deny')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Admit</span><span class="vocab-ipa">/ədˈmɪt/</span><span class="vocab-pt">ADMITIR</span></div><button class="audio-btn-round" onclick="playAudio('Admit')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Agree</span><span class="vocab-ipa">/əˈɡriː/</span><span class="vocab-pt">CONCORDAR</span></div><button class="audio-btn-round" onclick="playAudio('Agree')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Disagree</span><span class="vocab-ipa">/ˌdɪsəˈɡriː/</span><span class="vocab-pt">DISCORDAR</span></div><button class="audio-btn-round" onclick="playAudio('Disagree')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Reply / Respond</span><span class="vocab-ipa">/rɪˈplaɪ/</span><span class="vocab-pt">RESPONDER</span></div><button class="audio-btn-round" onclick="playAudio('Reply')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Inform</span><span class="vocab-ipa">/ɪnˈfɔːrm/</span><span class="vocab-pt">INFORMAR</span></div><button class="audio-btn-round" onclick="playAudio('Inform')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Advise</span><span class="vocab-ipa">/ədˈvaɪz/</span><span class="vocab-pt">ACONSELHAR</span></div><button class="audio-btn-round" onclick="playAudio('Advise')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Ask / Inquire</span><span class="vocab-ipa">/æsk/</span><span class="vocab-pt">PERGUNTAR</span></div><button class="audio-btn-round" onclick="playAudio('Ask')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Claim</span><span class="vocab-ipa">/kleɪm/</span><span class="vocab-pt">AFIRMAR / ALEGAR</span></div><button class="audio-btn-round" onclick="playAudio('Claim')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Declare</span><span class="vocab-ipa">/dɪˈkler/</span><span class="vocab-pt">DECLARAR</span></div><button class="audio-btn-round" onclick="playAudio('Declare')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Remark</span><span class="vocab-ipa">/rɪˈmɑːrk/</span><span class="vocab-pt">OBSERVAR / DIZER</span></div><button class="audio-btn-round" onclick="playAudio('Remark')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Assure</span><span class="vocab-ipa">/əˈʃʊr/</span><span class="vocab-pt">GARANTIR</span></div><button class="audio-btn-round" onclick="playAudio('Assure')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Warn</span><span class="vocab-ipa">/wɔːrn/</span><span class="vocab-pt">AVISAR / ADVERTIR</span></div><button class="audio-btn-round" onclick="playAudio('Warn')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Narrate / Recount</span><span class="vocab-ipa">/ˈnæreɪt/</span><span class="vocab-pt">NARRAR / RECONTAR</span></div><button class="audio-btn-round" onclick="playAudio('Narrate')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Allegedly</span><span class="vocab-ipa">/əˈledʒɪdli/</span><span class="vocab-pt">SUPOSTAMENTE</span></div><button class="audio-btn-round" onclick="playAudio('Allegedly')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">According to</span><span class="vocab-ipa">/əˈkɔːrdɪŋ tu/</span><span class="vocab-pt">DE ACORDO COM</span></div><button class="audio-btn-round" onclick="playAudio('According to')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Quote</span><span class="vocab-ipa">/kwoʊt/</span><span class="vocab-pt">CITAÇÃO</span></div><button class="audio-btn-round" onclick="playAudio('Quote')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Statement</span><span class="vocab-ipa">/ˈsteɪtmənt/</span><span class="vocab-pt">DECLARAÇÃO</span></div><button class="audio-btn-round" onclick="playAudio('Statement')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Conversation</span><span class="vocab-ipa">/ˌkɑːnvərˈseɪʃn/</span><span class="vocab-pt">CONVERSA</span></div><button class="audio-btn-round" onclick="playAudio('Conversation')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Account</span><span class="vocab-ipa">/əˈkaʊnt/</span><span class="vocab-pt">RELATO</span></div><button class="audio-btn-round" onclick="playAudio('Account')">🔊</button></div>
+                <div class="vocab-item"><div class="vocab-text"><span class="vocab-en">Description</span><span class="vocab-ipa">/dɪˈskrɪpʃn/</span><span class="vocab-pt">DESCRIÇÃO</span></div><button class="audio-btn-round" onclick="playAudio('Description')">🔊</button></div>
+            </div>
+        </section>
+
+        <section id="tarefa-extra" class="extra-task">
+            <h3>Tarefa Extra ✍️</h3>
+            <h4>Translate the Text</h4>
+            <p>Read the text below about a small misunderstanding at an office. Pay attention to how conversations are reported. Then, try to translate it into Portuguese.</p>
+            <p>
+                Yesterday at the office was quite confusing. In the morning, my manager, Sarah, told me, "I <span class="example-word">need</span> the quarterly report on my desk by 3 PM." I confirmed that I <span class="example-word">understood</span>. So, I started working on it immediately. A bit later, my colleague, Tom, came to my desk. He said, "I just <span class="example-word">spoke</span> to Sarah. She <span class="example-word">is going</span> to a client meeting this afternoon." I thought that was strange, but I continued working.
+                <br><br>
+                Around noon, I was almost finished. Tom passed by again and said, "Sarah <span class="example-word">mentioned</span> she <span class="example-word">will be</span> back tomorrow." This was a surprise. I asked him, "Did she say anything about the report?" Tom replied, "No, she just <span class="example-word">told</span> me that her meeting <span class="example-word">had been moved</span> from tomorrow to today."
+                <br><br>
+                Now I was really confused. I decided to send Sarah a quick email. I wrote, "Tom said that you <span class="example-word">were</span> in a meeting and that you <span class="example-word">would be</span> back the next day. Do you still need the report by 3 PM today?"
+                <br><br>
+                A few minutes later, Sarah called me. She sounded amused. She said, "I <span class="example-word">am</span> in the building, but in a different conference room. I <span class="example-word">told</span> Tom I <span class="example-word">was going</span> to a meeting 'on the other side', meaning the other side of the building, not another city!" She explained that she still <span class="example-word">needed</span> the report by 3 PM. She added that she <span class="example-word">had never said</span> anything about being back the next day.
+                <br><br>
+                When I saw Tom later, I told him what Sarah had said. He laughed and said he <span class="example-word">had misunderstood</span> her completely. He admitted that he <span class="example-word">had been</span> a bit distracted during their conversation. It was a classic case of miscommunication, but in the end, the report was delivered on time.
+            </p>
+            <hr>
+            <h4>Quiz</h4>
+            <p>Why was there confusion about the report's deadline?</p>
+            <ol class="quiz-options">
+                <li>Sarah had told the narrator that the deadline was changed to the next day.</li>
+                <li>The narrator had misunderstood Sarah's initial instructions.</li>
+                <li>Tom had incorrectly reported that Sarah would be out of the office for the rest of the day.</li>
+                <li>The client meeting had been cancelled, changing everyone's priorities.</li>
+                <li>Sarah had forgotten that she had asked for the report.</li>
+            </ol>
+            <details class="gabarito">
+                <summary>Ver Resposta do Quiz</summary>
+                <div class="gabarito-content">
+                    Resposta Correta: <strong>c) Tom had incorrectly reported that Sarah would be out of the office for the rest of the day.</strong>
+                </div>
+            </details>
+        </section>
+
+        <section id="exercicios-finais">
+            <h3>Exercícios Práticos Finais 📝</h3>
+            <div class="secao-exercicios">
+                <h4>Parte 1: Transforme para o Discurso Indireto</h4>
+                <p>Reescreva as frases no Discurso Indireto. Comece com "He said..." ou "She told me...".</p>
+                <ol class="exercise-list">
+                    <li>"I am very busy today." (He)
+                        <br>→ <span class="fill-in-blank"></span>.
+                    </li>
+                    <li>"We went to the supermarket yesterday." (She to me)
+                        <br>→ <span class="fill-in-blank"></span>.
+                    </li>
+                    <li>"I will call you next week." (He)
+                        <br>→ <span class="fill-in-blank"></span>.
+                    </li>
+                </ol>
+            </div>
+            <details class="gabarito">
+                <summary>Ver Gabarito dos Exercícios</summary>
+                <div class="gabarito-content">
+                    <p><strong>Parte 1:</strong> 1. He said (that) he was very busy that day. 2. She told me (that) they had gone to the supermarket the day before. 3. He said (that) he would call me the following week.</p>
+                </div>
+            </details>
+        </section>
+
+        <section id="conclusao">
+            <h3>Conclusão 🥳</h3>
+            <p>Parabéns por concluir a Aula 30! Você aprendeu os fundamentos do Discurso Indireto (Reported Speech), incluindo as importantes mudanças de tempo verbal (backshift), pronomes e expressões de tempo/lugar. Agora você pode relatar o que outras pessoas disseram de forma mais precisa e natural.</p>
+            <p>Continue praticando a transformação de frases e observando como o discurso indireto é usado em diferentes contextos.</p>
+            <p>Na Aula 31: "Verbos com "-ing" como Nomes – Gerúndios", vamos explorar como os verbos terminados em "-ing" podem funcionar como substantivos. Até lá!</p>
+        </section>
+
+        <!-- Botão Navegação Rodapé -->
+        <button class="nav-btn" onclick="alert('Voltar ao Menu Principal')">⬅ Voltar ao Menu</button>
+    </div>
+
+    <!-- SCRIPT DE ÁUDIO OTIMIZADO -->
+    <script>
+        let voices = [];
+        
+        function loadVoices() {
+            voices = window.speechSynthesis.getVoices();
+        }
+
+        loadVoices();
+
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function playAudio(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.85; 
+                utterance.pitch = 1;
+
+                if (voices.length === 0) loadVoices();
+
+                let targetVoice = voices.find(voice => 
+                    (voice.name.includes('Google') || voice.name.includes('Premium') || voice.name.includes('Samantha')) 
+                    && voice.lang.includes('en-US')
+                );
+
+                if (!targetVoice) {
+                    targetVoice = voices.find(voice => voice.lang === 'en-US');
+                }
+
+                if (!targetVoice) {
+                    targetVoice = voices.find(voice => voice.lang.startsWith('en'));
+                }
+
+                if (targetVoice) {
+                    utterance.voice = targetVoice;
+                    utterance.lang = targetVoice.lang; 
+                } else {
+                    utterance.lang = 'en-US'; 
+                }
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Desculpe, seu navegador não suporta reprodução de áudio.");
+            }
+        }
+    </script>
+</body>
+</html>
